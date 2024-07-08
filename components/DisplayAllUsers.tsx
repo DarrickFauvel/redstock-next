@@ -1,5 +1,5 @@
 import { getAllUsers } from "@/app/actions/user"
-import { Allura } from "next/font/google"
+import UserFormModal from "./UserFormModal"
 
 const DisplayAllUsers = async () => {
   const allUsers = await getAllUsers()
@@ -15,9 +15,9 @@ const DisplayAllUsers = async () => {
   })
 
   return (
-    <div className="mt-8">
-      DisplayAllUsers
-      <div className="overflow-x-auto">
+    <div className="prose">
+      <h1>Users</h1>
+      <div className="flex flex-col overflow-x-auto">
         <table className="table">
           <thead>
             <tr>
@@ -29,6 +29,8 @@ const DisplayAllUsers = async () => {
           <tbody>{tableRowsOfUsers}</tbody>
         </table>
       </div>
+
+      <UserFormModal />
     </div>
   )
 }

@@ -1,12 +1,16 @@
-import DisplayAllUsers from "@/components/DisplayAllUsers"
-import NewUserForm from "@/components/NewUserForm"
-import Image from "next/image"
+import Link from "next/link"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
-      <NewUserForm />
-      <DisplayAllUsers />
+      <div className="flex flex-col gap-4">
+        <Link className="btn" href="/users">
+          List Users
+        </Link>
+        <Link className="btn" href="/users/add">
+          Add User
+        </Link>
+      </div>
     </main>
   )
 }

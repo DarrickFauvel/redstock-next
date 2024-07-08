@@ -1,12 +1,14 @@
 import Image from "next/image"
 
 import targetArrow from "../assets/images/fluent--target-arrow-24-filled.svg"
+import keepImage from "../assets/images/logos--formkeep.svg"
+import Link from "next/link"
 
 const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">
+        <Link className="btn btn-ghost text-xl" href="/">
           <div className="flex items-center gap-1">
             <Image
               className="w-8"
@@ -15,9 +17,9 @@ const Navbar = () => {
               height={100}
               alt="target with arrow"
             />
-            <span>red stock</span>
+            <span>red stock inventory</span>
           </div>
-        </a>
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">

@@ -1,6 +1,7 @@
+"use client"
 import Alert from "./Alert"
 
-const Toast = ({ values }) => {
+export default function Toast({ values }) {
   const { isSubmitted } = values
 
   return (
@@ -11,4 +12,3 @@ const Toast = ({ values }) => {
     </>
   )
 }
-export default Toast

@@ -9,11 +9,22 @@ export const getAllUsers = async () => {
   return allUsers
 }
 
-export const createUser = async (data: { email: string; name: string }) => {
+export const createUser = async (data: {
+  email: string
+  name: string
+  avatar: string
+  role: string
+}) => {
   await prisma.user.create({
     data: {
       email: data.email,
       name: data.name,
+      profile: {
+        create: {
+          avatar: data.avatar,
+          role: data.role,
+        },
+      },
     },
   })
   revalidatePath("/")
