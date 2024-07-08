@@ -16,14 +16,13 @@ const NewUserForm = () => {
     }))
   }
 
-  const handleSubmit = async (formData: FormData) => {
-    const userData = {
-      name: formData.get("name")?.toString(),
-      email: formData.get("email")?.toString(),
+  const handleSubmit = async () => {
+    if (!user.name || !user.email) {
+      return
     }
 
     try {
-      await createUser(userData)
+      await createUser(user)
       setIsSubmitted(true)
     } catch (err) {
       console.error(err)
@@ -43,6 +42,7 @@ const NewUserForm = () => {
             name="name"
             value={user.name}
             onChange={handleChange}
+            // required
           />
         </label>
         <label className="input input-bordered flex items-center gap-2">
@@ -54,6 +54,7 @@ const NewUserForm = () => {
             name="email"
             value={user.email}
             onChange={handleChange}
+            // required
           />
         </label>
         <button className="btn">Submit</button>
