@@ -1,10 +1,10 @@
 "use client"
-import { createUser } from "@/app/actions/user"
-import { useState } from "react"
+import { getSingleUser, updateUser } from "@/app/actions/user"
+import { useEffect, useState } from "react"
 
 import Toast from "@/components/Toast"
 
-const NewUserForm = () => {
+const EditUserForm = ({ id }) => {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -14,16 +14,26 @@ const NewUserForm = () => {
   // const [user, setUser] = useState({ name: "", email: "" })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
+  useEffect(() => {
+    const getUser = async (id: number) => {
+      const data = await getSingleUser(id)
+      setFormState({
+        id: data.id,
+        name: data?.email,
+        email: data?.email,
+        avatar: data.profile.avatar,
+        role: data.profile.role,
+      })
+    }
+    getUser(id)
+  }, [])
+
   const handleChange = (e: any) => {
     const { name, value, type } = e.target
     setFormState((prevFormState) => ({
       ...prevFormState,
       [name]: type === "checkbox" ? e.target.checked : value,
     }))
-    // setUser((prev) => ({
-    //   ...prev,
-    //   [name]: value,
-    // }))
   }
 
   const handleSubmit = async () => {
@@ -33,7 +43,7 @@ const NewUserForm = () => {
     }
 
     try {
-      await createUser(formState)
+      await updateUser(formState)
       setIsSubmitted(true)
     } catch (err) {
       console.error(err)
@@ -42,7 +52,7 @@ const NewUserForm = () => {
 
   return (
     <div className="prose">
-      <h1>Create User</h1>
+      <h1>Update User</h1>
       <form className="flex flex-col gap-4" action={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2">
           Name
@@ -104,4 +114,4 @@ const NewUserForm = () => {
     </div>
   )
 }
-export default NewUserForm
+export default EditUserForm

@@ -2,9 +2,8 @@ import DisplayAllUsers from "@/components/DisplayAllUsers"
 
 export default function UserPage() {
   return (
-    <section>
-      <h1>User Page</h1>
+    <div className="flex justify-center">
       <DisplayAllUsers />
-    </section>
+    </div>
   )
 }
