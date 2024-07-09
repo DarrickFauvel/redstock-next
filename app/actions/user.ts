@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache"
 
 const prisma = new PrismaClient()
 
+type RoleEnum = "User" | "Admin" | "Demo"
+
 export const getAllUsers = async () => {
   const allUsers = await prisma.user.findMany({
     orderBy: {
@@ -32,7 +34,7 @@ export const createUser = async (data: {
   email: string
   name: string
   avatar: string
-  role: "User" | "Admin" | "Demo"
+  role: RoleEnum
 }) => {
   await prisma.user.create({
     data: {
@@ -54,7 +56,7 @@ export const updateUser = async (data: {
   email: string
   name: string
   avatar: string
-  role: string
+  role: RoleEnum
 }) => {
   await prisma.user.update({
     where: {
