@@ -4,26 +4,33 @@ import { useEffect, useState } from "react"
 
 import Toast from "@/components/Toast"
 
-const EditUserForm = ({ id }) => {
+const EditUserForm = ({ id }: { id: number }) => {
   const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    avatar: "",
+    id: null,
+    name: null,
+    email: null,
+    avatar: null,
     role: "User",
   })
-  // const [user, setUser] = useState({ name: "", email: "" })
+
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   useEffect(() => {
     const getUser = async (id: number) => {
       const data = await getSingleUser(id)
-      setFormState({
-        id: data.id,
-        name: data?.email,
-        email: data?.email,
-        avatar: data.profile.avatar,
-        role: data.profile.role,
-      })
+
+      if (data) {
+        // console.log(data)
+        setFormState({
+          id: data.id,
+          name: data?.email,
+          email: data?.email,
+          avatar: data.profile?.avatar,
+          role: data.profile?.role,
+        })
+      } else {
+        return
+      }
     }
     getUser(id)
   }, [])
@@ -51,7 +58,7 @@ const EditUserForm = ({ id }) => {
   }
 
   return (
-    <div className="prose">
+    <div className="prose mt-8">
       <h1>Update User</h1>
       <form className="flex flex-col gap-4" action={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2">
