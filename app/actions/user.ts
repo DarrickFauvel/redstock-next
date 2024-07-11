@@ -63,6 +63,7 @@ export const updateUser = async (data: {
       id: data.id,
     },
     data: {
+      id: data.id,
       email: data.email,
       name: data.name,
       profile: {
