@@ -4,8 +4,7 @@ export default function AddUserPage({ params }) {
   const { id } = params
 
   return (
-    <section>
-      <h1>Add User</h1>
+    <section className="flex justify-center">
       <EditUserForm id={+id} />
     </section>
   )
